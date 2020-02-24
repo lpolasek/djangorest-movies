@@ -24,6 +24,7 @@ class ProducerInline(admin.TabularInline):
 class MovieAdmin(admin.ModelAdmin):
     """Person admin."""
     model = Movie
+    readonly_fields = ['roman_release_year']
     inlines = [
         CastingInline,
         DirectorsInline,
