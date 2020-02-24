@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.views.generic import TemplateView
 
 from rest_framework import routers
+from rest_framework.schemas import get_schema_view
 
+from rest import settings
 from movies import views
 
 
@@ -25,8 +28,6 @@ router = routers.DefaultRouter()
 router.register(r'persons', views.PersonViewSet)
 router.register(r'movies', views.MovieViewSet)
 
-# Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
@@ -36,5 +37,24 @@ urlpatterns = [
             'rest_framework.urls',
             namespace='rest_framework'
         )
-    )
+    ),
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        path(
+            'openapi',
+            get_schema_view(
+                title="Movies",
+                description="API for movies app",
+                version="1.0.0"
+            ), name='openapi-schema'
+        ),
+        path(
+            'swagger-ui/', TemplateView.as_view(
+                template_name='swagger-ui.html',
+                extra_context={'schema_url': 'openapi-schema'}
+            ),
+            name='swagger-ui'
+        ),
+    ]
