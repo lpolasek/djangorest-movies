@@ -7,6 +7,7 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Person
         fields = [
+            'id',
             'url',
             'last_name',
             'first_name',
@@ -23,6 +24,7 @@ class MovieSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Movie
         fields = [
+            'id',
             'url',
             'name',
             'release_year',
