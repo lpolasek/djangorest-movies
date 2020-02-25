@@ -9,7 +9,7 @@ class Person(models.Model):
         max_length=500,
         blank=True,
         help_text='This field is converted to a list using ' +
-            '| as a separator'
+                  '| as a separator'
     )
 
     def __str__(self):

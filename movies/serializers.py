@@ -60,7 +60,8 @@ class TokenizedListField(serializers.ListField):
         iterable = data.all() if isinstance(data, models.Manager) else data
 
         return [
-            self.child.to_representation(item) for item in iterable.split(self.token)
+            self.child.to_representation(item)
+            for item in iterable.split(self.token)
         ]
 
 
