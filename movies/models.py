@@ -28,7 +28,7 @@ class Movie(models.Model):
             (10, 'X'), (9, 'IX'), (5, 'V'), (4, 'IV'), (1, 'I')]
 
         roman = ''
-        num = self.release_year
+        num = 0 if self.release_year is None else self.release_year
 
         while num > 0:
             for i, r in num_map:
