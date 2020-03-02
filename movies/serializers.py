@@ -51,7 +51,7 @@ class TokenizedListField(serializers.ListField):
         if any(errors):
             raise ValidationError(errors)
 
-        return self.token.join(ret)
+        return self.token.join(str(r) for r in ret)
 
     def to_representation(self, data):
         """
